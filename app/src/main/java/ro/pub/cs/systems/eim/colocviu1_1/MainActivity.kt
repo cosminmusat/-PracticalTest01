@@ -1,5 +1,6 @@
 package ro.pub.cs.systems.eim.colocviu1_1
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         val buttonRight = findViewById<Button>(R.id.button_right)
         val buttonCenter = findViewById<Button>(R.id.button_center)
         val buttonBelowTextView = findViewById<Button>(R.id.button_below_textview)
+        val buttonResetAndNavigate = findViewById<Button>(R.id.button_reset_and_navigate)
 
         val buttons = listOf(buttonNorth, buttonLeft, buttonRight, buttonCenter, buttonBelowTextView)
 
@@ -45,6 +47,20 @@ class MainActivity : AppCompatActivity() {
             cardinalButtonCount = savedInstanceState.getInt("cardinalButtonCount", 0)
             Log.d("MainActivity", "Restored cardinalButtonCount: $cardinalButtonCount")
             textView.text = "Buttons pressed: $cardinalButtonCount"
+        }
+
+        buttonBelowTextView.setOnClickListener {
+            val intent = Intent(this, SecondaryActivity::class.java)
+            intent.putExtra("instructions", textView.text.toString())
+            startActivity(intent)
+        }
+
+        buttonResetAndNavigate.setOnClickListener {
+            textView.text = ""
+            cardinalButtonCount = 0
+            val intent = Intent(this, SecondaryActivity::class.java)
+            intent.putExtra("instructions", "")
+            startActivity(intent)
         }
     }
 
