@@ -33,17 +33,18 @@ class MainActivity : AppCompatActivity() {
 
         for (button in buttons) {
             button.setOnClickListener {
-                textView.text = "${textView.text}, ${button.text}"
                 if (button == buttonNorth || button == buttonLeft || button == buttonRight || button == buttonCenter) {
                     cardinalButtonCount++
                     Log.d("MainActivity", "Cardinal button pressed. Count: $cardinalButtonCount")
                 }
+                textView.text = "Buttons pressed: $cardinalButtonCount"
             }
         }
 
         if (savedInstanceState != null) {
             cardinalButtonCount = savedInstanceState.getInt("cardinalButtonCount", 0)
             Log.d("MainActivity", "Restored cardinalButtonCount: $cardinalButtonCount")
+            textView.text = "Buttons pressed: $cardinalButtonCount"
         }
     }
 
